@@ -69,7 +69,7 @@ public class userController {
     userService.changePassword(passwordModel, id);
   }
 
-  @PostMapping("/{id}/fotgot-password")
+  @GetMapping("users/{id}/fotgot-password")
   public String forgotPassword(@PathVariable("id") int id) {
     return userService.forgotPassword(id);
   }

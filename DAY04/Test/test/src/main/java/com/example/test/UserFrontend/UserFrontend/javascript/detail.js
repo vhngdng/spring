@@ -11,7 +11,7 @@ const avatar = document.querySelector(".avatar-preview");
 const changePassBtn = document.querySelector(".btn-primary");
 const updateUser = document.getElementById("btn-save");
 const btnBack = document.querySelector(".btn-back");
-
+const forgotPassword = document.getElementById("btn-forgot-password");
 btnBack.innerHTML = "";
 btnBack.appendChild(document.createElement("a"));
 btnBack.getElementsByTagName("a")[0].href = "./index.html";
@@ -269,3 +269,14 @@ updateUser.addEventListener("click", async () => {
 			console.log(error);
 		});
 });
+
+
+// quen mat khau
+forgotPassword.addEventListener("click", async () => {
+	await axios.get(`http://localhost:8079/api/v1/users/${id}/fotgot-password`)
+	.then(res => {
+		res.data;
+		alert("your password is: " + res.data);
+	})
+	.catch(error => console.log(error));
+})

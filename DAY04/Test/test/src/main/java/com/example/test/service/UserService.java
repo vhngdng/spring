@@ -10,6 +10,7 @@ import com.example.test.dto.UserSignUp;
 import com.example.test.exception.NotFoundException;
 import com.example.test.model.User;
 import com.example.test.repository.UserRepository;
+import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserService {
 //    public UserDTO findAll(int id) {
 //        User user = userRepository.findAll();
 //    }
-
+  private final Faker faker;
 
   public List<UserDTO> findAllUser() {
     return userRepository.findAll().stream().map(mapper::toDTO).toList();
@@ -120,9 +121,10 @@ public class UserService {
 
 
   public String forgotPassword(int id) {
-    return userRepository.findUserById(id)
-            .orElseThrow(() -> new NotFoundException("Khong ton tai id " + id))
-            .getPassword();
+    User user = userRepository.findUserById(id)
+            .orElseThrow(() -> new NotFoundException("Khong ton tai id " + id));
+    user.setPassword(faker.internet().password());
+    return user.getPassword();
   }
 
   public String uploadFile(int id, MultipartFile file) {
