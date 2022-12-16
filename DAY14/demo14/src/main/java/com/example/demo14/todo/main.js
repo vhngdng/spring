@@ -90,9 +90,10 @@ const updateTodo = async (id, event) => {
 			})
 			.then(() => {
 				let foundIndex = todos.findIndex((x) => x.id == id);
-				todos[foundIndex].title = title;
+				todos[foundIndex].title = todo;
 				todos[foundIndex].status = checked;
 				renderTodos(todos);
+				
 			})
 			.catch(function (error) {
 				showError(error);

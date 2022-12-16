@@ -27,4 +27,10 @@ public class ControllerHandleException {
 //        });
 //        return errors;
 //    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorMessage handleBadRequestException(BadRequestException ex) {
+        return new ErrorMessage(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
 }

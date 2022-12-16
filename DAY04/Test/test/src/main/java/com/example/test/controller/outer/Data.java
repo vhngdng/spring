@@ -18,4 +18,7 @@ public class Data {
     private int totalSize;
 
 
+    public Data(List<UserDTO> allUser) {
+        this.userDTOS = allUser;
+    }
 }

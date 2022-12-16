@@ -1,4 +1,4 @@
-package com.example.test.controller;
+package com.example.test.controller.outer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
