@@ -10,6 +10,7 @@ import com.example.test.dto.UserSignUp;
 import com.example.test.exception.NotFoundException;
 import com.example.test.model.User;
 import com.example.test.repository.UserRepository;
+import com.example.test.request.UpdateAvatarRequest;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class UserService {
   private final UserRepository userRepository;
   private final FileService fileService;
   private final Mapper mapper;
+
+  private final EmailService mailService;
 //    public UserDTO findAll(int id) {
 //        User user = userRepository.findAll();
 //    }
@@ -107,7 +110,7 @@ public class UserService {
   }
 
 
-  public void changePassword(PasswordModel passwordModel, int id) {
+  public String changePassword(PasswordModel passwordModel, int id) {
     User user = userRepository.findUserById(id).orElseThrow(() -> new NotFoundException("Khong ton tai id " + id));
     if (!user.getPassword().equals(passwordModel.getOldPassword())) {
       throw new NotFoundException("PassWord khong chinh xac " + passwordModel.getOldPassword());
@@ -117,6 +120,7 @@ public class UserService {
     } else {
       user.setPassword(passwordModel.getNewPassword());
     }
+    return user.getPassword();
   }
 
 
@@ -124,6 +128,8 @@ public class UserService {
     User user = userRepository.findUserById(id)
             .orElseThrow(() -> new NotFoundException("Khong ton tai id " + id));
     user.setPassword(faker.internet().password());
+
+    mailService.sendMail(user.getEmail(), "Quen mat khau", "mat khau moi " + user.getPassword());
     return user.getPassword();
   }
 
@@ -151,5 +157,12 @@ public class UserService {
     userRepository.findUserById(id).orElseThrow(() ->
             new NotFoundException("User not found with id: " + id));
     fileService.deleteFile(id, fileId);
+  }
+
+  public void updateAvatar(int id, UpdateAvatarRequest request) {
+    User user = userRepository.findUserById(id).orElseThrow(() -> {
+      throw new NotFoundException("Not found user with id = " + id);
+    });
+    user.setAvatar(request.getAvatar());
   }
 }

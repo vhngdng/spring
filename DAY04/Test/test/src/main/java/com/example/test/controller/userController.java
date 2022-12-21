@@ -5,6 +5,7 @@ import com.example.test.controller.outer.Data;
 import com.example.test.dto.UserDTO;
 import com.example.test.dto.UserSignUp;
 import com.example.test.controller.outer.Avatar;
+import com.example.test.request.UpdateAvatarRequest;
 import com.example.test.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class userController {
                              @RequestParam(value = "limit", defaultValue = "10") int limit) {
     return userService.findUserPaging(page, limit);
   }
+
   @GetMapping("/users/all")
   public List<UserDTO> findAll() {
     return userService.findAllUser();
@@ -58,15 +60,15 @@ public class userController {
     return userService.updateUser(userDTO, id);
   }
 
-  @PutMapping("/users/{id}/update-avatar")
-  public void changeAvatar(@RequestBody Avatar avatar, @PathVariable("id") int id) {
-    userService.changeAvatar(avatar, id);
+//  @PutMapping("/users/{id}/update-avatar")
+//  public void changeAvatar(@RequestBody Avatar avatar, @PathVariable("id") int id) {
+//    userService.changeAvatar(avatar, id);
+//
+//  }
 
-  }
-
-  @PutMapping("/users/{id}/update-password")
-  public void changePassword(@RequestBody PasswordModel passwordModel, @PathVariable("id") int id) {
-    userService.changePassword(passwordModel, id);
+  @PostMapping("/users/{id}/update-password")
+  public String changePassword(@RequestBody PasswordModel passwordModel, @PathVariable("id") int id) {
+    return userService.changePassword(passwordModel, id);
   }
 
   @GetMapping("users/{id}/fotgot-password")
@@ -110,11 +112,20 @@ public class userController {
     List<String> files = userService.getFiles(id);
     return ResponseEntity.ok(files);
   }
+
   //Xoa anh
   @DeleteMapping("/users/{id}/files/{fileId}")
-  public ResponseEntity<?> getFile(@PathVariable int id, @PathVariable String fileId) {
+  public ResponseEntity<?> deleteFile(@PathVariable int id, @PathVariable String fileId) {
     userService.deleteFile(id, fileId);
     return ResponseEntity.noContent().build();  //204
   }
-}
+
+
+  @PutMapping("/users/{id}/update-avatar")
+  public ResponseEntity<?> updateAvatar(@PathVariable int id, @RequestBody UpdateAvatarRequest request) {
+    userService.updateAvatar(id, request);
+    return ResponseEntity.noContent().build();
+  }
+
+};
 

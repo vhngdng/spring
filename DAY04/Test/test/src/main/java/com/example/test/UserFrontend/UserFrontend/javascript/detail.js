@@ -7,11 +7,13 @@ const fullName = document.getElementById("fullname");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const address = document.getElementById("address");
-const avatar = document.querySelector(".avatar-preview");
+const avaPreview = document.getElementById("avatar-preview");
+console.log(avaPreview);
 const changePassBtn = document.querySelector(".btn-primary");
 const updateUser = document.getElementById("btn-save");
 const btnBack = document.querySelector(".btn-back");
 const forgotPassword = document.getElementById("btn-forgot-password");
+
 btnBack.innerHTML = "";
 btnBack.appendChild(document.createElement("a"));
 btnBack.getElementsByTagName("a")[0].href = "./index.html";
@@ -19,18 +21,10 @@ btnBack.getElementsByTagName("a")[0].textContent = "Quay lại";
 
 const checkAddress = (options, addressName) => {
 	for (i = 0; i < options.length; i++) {
-		if (options[i].text === addressName) {
-			return i;
-		}
+		if (options[i].text === addressName) return i;
 	}
 };
-let user = {
-	fullName: "",
-	email: "",
-	phone: "",
-	address: [],
-	avatar: "",
-};
+let user = { fullName: "", email: "", phone: "", address: [], avatar: "" };
 const findUserById = async (id) => {
 	await axios
 		.get(`http://localhost:8079/api/v1/users/${id}`)
@@ -38,9 +32,7 @@ const findUserById = async (id) => {
 			console.log(res.data);
 			fillInformation(res.data);
 		})
-		.catch((error) => {
-			console.log(error);
-		});
+		.catch(error => console.log(error));
 };
 findUserById(id);
 
@@ -48,29 +40,27 @@ const fillInformation = (user) => {
 	fullName.value = user.name;
 	email.value = user.email;
 	phone.value = user.phone;
-	// console.log(user.address);
+	avaPreview.src = `http://localhost:8079${user.avatar}`;
+	console.log(user.avatar);
 	getAddress(user.address);
 	user = {
 		fullName: user.name,
 		email: user.email,
 		phone: user.phone,
 		address: user.address,
+		avatar: user.avatar,
 	};
 	console.log(user);
 };
 
 let getAddress = async (address) => {
 	await getProvince();
-	// let select = document.querySelectorAll("select");
-	// console.log(select);
 	let options = formSelect.options;
 	console.log(options);
 	formSelect.selectedIndex = checkAddress(options, address[0]);
 	if (address[1] !== null) {
 		await getDistrict();
-		let districtSelected = document
-			.querySelector(".district")
-			.getElementsByTagName("select")[0];
+		let districtSelected = document.querySelector(".district select");
 		districtSelected.selectedIndex = checkAddress(
 			districtSelected.options,
 			address[1]
@@ -79,14 +69,11 @@ let getAddress = async (address) => {
 	}
 
 	if (address[2] !== null) {
-		let wardSelected = document
-			.querySelector(".ward")
-			.getElementsByTagName("select")[0];
+		let wardSelected = document.querySelector(".ward select");
 		wardSelected.selectedIndex = checkAddress(wardSelected.options, address[2]);
 	}
 };
 
-//////////////////////////////////
 // update
 
 const formSelect = document.getElementById("address");
@@ -121,7 +108,8 @@ const createSelectOption = (options, divSelect) => {
 	select.classList.add("form-select");
 	addOptionForSelect(options, select);
 	divSelect.appendChild(select);
-	p4.insertBefore(divSelect, avatar.parentNode);
+	console.log(avaPreview.parentNode.parentNode);
+	p4.insertBefore(divSelect, avaPreview.parentNode.parentNode);
 };
 
 // province
@@ -129,17 +117,13 @@ const getProvince = async () => {
 	return await axios
 		.get(`https://provinces.open-api.vn/api/p/`)
 		.then((res) => {
-			let provinces = res.data;
-			addOptionForSelect(provinces, formSelect);
+			addOptionForSelect(res.data, formSelect);
 		})
-		.catch((error) => {
-			console.log(error);
-		});
+		.catch(error => console.log(error));
 };
 
 formSelect.addEventListener("change", () => {
 	formSelect.selected = "true";
-	// console.log(formSelect.value);
 	getDistrict();
 });
 
@@ -158,26 +142,21 @@ const getDistrict = async () => {
 			createSelectOption(districts, districtDiv);
 
 			// get select lv 2
-			let districtSelected = document
-				.querySelector(".district")
-				.getElementsByTagName("select")[0];
+			let districtSelected = document.querySelector(".district select");
+			console.log(districtSelected);
 			// add event for select lv 2
 			districtSelected.addEventListener("change", () => {
 				districtSelected.selected = "true";
 				getWards();
 			});
 		})
-		.catch((error) => {
-			console.log(error);
-		});
+		.catch(error => console.log(error));
 };
 
 // ward
 const getWards = async () => {
 	removeElementByClass("ward");
-	let districtSelected = document
-		.querySelector(".district")
-		.getElementsByTagName("select")[0];
+	let districtSelected = document.querySelector(".district select");
 	let ward = districtSelected.options[districtSelected.selectedIndex];
 	let wardDiv = document.createElement("div");
 	wardDiv.classList.add("ward");
@@ -187,16 +166,13 @@ const getWards = async () => {
 			let wards = res.data.wards;
 			createSelectOption(wards, wardDiv);
 		})
-		.catch((error) => {
-			console.log(error);
-		});
+		.catch(error => console.log(error));
 };
 
 // thay doi mat khau
 changePassBtn.addEventListener("click", async () => {
 	try {
 		let passwordModel = getOldNewPass();
-
 		await axios.post(
 			`http://localhost:8079/api/v1/users/${id}/update-password`,
 			{
@@ -249,7 +225,7 @@ updateUser.addEventListener("click", async () => {
 	if (addressChanged.length !== 0) {
 		addressChanged = user.address;
 	}
-		console.log(addressChanged);
+	console.log(addressChanged);
 	debugger;
 	await axios
 		.put(`http://localhost:8079/api/v1/users/${id}`, {
@@ -270,13 +246,13 @@ updateUser.addEventListener("click", async () => {
 		});
 });
 
-
 // quen mat khau
 forgotPassword.addEventListener("click", async () => {
-	await axios.get(`http://localhost:8079/api/v1/users/${id}/fotgot-password`)
-	.then(res => {
-		res.data;
-		alert("your password is: " + res.data);
-	})
-	.catch(error => console.log(error));
-})
+	await axios
+		.get(`http://localhost:8079/api/v1/users/${id}/fotgot-password`)
+		.then((res) => {
+			res.data;
+			alert("your password is: " + res.data);
+		})
+		.catch(error => console.log(error));
+});
