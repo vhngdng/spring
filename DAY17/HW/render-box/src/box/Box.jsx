@@ -7,7 +7,7 @@ function Box({boxes, removeBox}) {
 	return (
 		<>
 			<div className="box-list">
-				{boxes.map((i, index) => (
+				{boxes.map((i) => (
 					<BoxItem
 						key={j++}
 						point={i}
