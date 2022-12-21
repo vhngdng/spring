@@ -3,7 +3,6 @@ import { React, useState, useEffect } from "react";
 import Box from "./box/Box";
 
 function App() {
-	const[idKey, setIdKey] = useState([]);
 	const [boxes, setBoxes] = useState([]);
 
 	const handleAddBox = () => {
@@ -14,7 +13,6 @@ function App() {
 
 	const removeBox = (id, event) => {
 		setBoxes(boxes.filter(box => box !== id));
-		
 	};
 	return (
 		<>
