@@ -11,9 +11,10 @@ function App() {
 		}
 	};
 
-	const removeBox = (id, event) => {
+	const removeBox = (id) => {
 		setBoxes(boxes.filter(box => box !== id));
 	};
+
 	return (
 		<>
 			<button id="btn" onClick={handleAddBox}>
