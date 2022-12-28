@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm ci
-
+RUN npm i bootstrap @fortawesome/fontawesome-free
 RUN npm run build
 
 CMD ["npm", "run", "start"]
