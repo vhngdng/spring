@@ -34,62 +34,70 @@ const productListMount = [
 
 function App() {
 	const [productList, setProductList] = useState([]);
-    const [totalMoney, setTotalMoney] = useState(0);
+	const [totalMoney, setTotalMoney] = useState(0);
 
 	useEffect(() => {
 		setProductList(productListMount);
-        
 	}, []);
 
-    useEffect(() => {
-        setTotalMoney(() => productListMount.reduce((n, curr) => n + curr.price, 0));
-    }, []);
+	useEffect(() => {
+		setTotalMoney(() =>
+			productListMount.reduce((n, curr) => n + curr.price, 0)
+		);
+	}, []);
 
-    const productAmount = useRef();
-    const handleAddCount = (id) => {
-        let newList = productList.map(product => {
-            if(product.id === id) {
-                product.count += 1
-            }   
-            setTotalMoney(prev => prev + product.price);
-            console.log(totalMoney)
-            return product;
-            
-        })
-        setProductList(newList);
-        
-    }
-    const handleDeleteCount = (id) => {
-        let newList = productList.map(product => {
-            product.id === id && product.count >= 2 && (product.count -= 1) && setTotalMoney(prev => prev - product.price);
+	const productAmount = useRef();
+	const handleAddCount = (id) => {
+		let newList = productList.map((product) => {
+			if (product.id === id) {
+				product.count += 1;
+			}
+			setTotalMoney((prev) => prev + product.price);
+			console.log(totalMoney);
+			return product;
+		});
+		setProductList(newList);
+	};
+	const handleDeleteCount = (id) => {
+		let newList = productList.map((product) => {
+			product.id === id &&
+				product.count >= 2 &&
+				(product.count -= 1) &&
+				setTotalMoney((prev) => prev - product.price);
 
-            return product;
-        })
-        setProductList(newList);
-    }
+			return product;
+		});
+		setProductList(newList);
+	};
 
-    const deleteProduct = (id) => {
-        let checkConfirm = window.confirm();
-        if(checkConfirm === true) {
-        let newList = productList.filter(product => product.id !== id)
-        setProductList(newList);
-        setTotalMoney(() => newList.reduce((n, curr) => n + curr.price, 0))
-        }
-    };
+	const deleteProduct = (id) => {
+		let checkConfirm = window.confirm();
+		if (checkConfirm === true) {
+			let newList = productList.filter((product) => product.id !== id);
+			setProductList(newList);
+			setTotalMoney(() => newList.reduce((n, curr) => n + curr.price, 0));
+		}
+	};
 	return (
 		<>
-			{productAmount !== 0 && (
+			{totalMoney === 0 && (
 				<p className="fst-italic message">Không có sản phẩm trong giỏ hàng</p>
 			)}
-			<ProductList 
-            productList={productList} 
-            productAmount={productAmount} 
-            handleAddCount={handleAddCount} 
-            handleDeleteCount={handleDeleteCount}
-            deleteProduct={deleteProduct}
-            />
-            <Bill totalMoney={totalMoney}/>
-        </>
+			<div className="row shopping-cart">
+				<div className="col-md-8">
+					<ProductList
+						productList={productList}
+						productAmount={productAmount}
+						handleAddCount={handleAddCount}
+						handleDeleteCount={handleDeleteCount}
+						deleteProduct={deleteProduct}
+					/>
+				</div>
+				<div className="col-md-4">
+					<Bill totalMoney={totalMoney} />
+				</div>
+			</div>
+		</>
 	);
 }
 
