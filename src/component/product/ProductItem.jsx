@@ -11,7 +11,7 @@ function ProductItem({
 		<>
 			<div className="product-item d-flex border mb-4">
 				<div key={product.image} className="image">
-					<img src={product.image} alt={product.name} />
+					<img src={product.image} alt={product.name} className="img-fluid"/>
 				</div>
 				<div
 					key={product.id}
