@@ -14,7 +14,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "serve -s build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -41,5 +41,5 @@
   "devDependencies": {
     "@types/bootstrap": "^5.2.6"
   },
-  "homepage": "https://myusername.github.io/my-app"
+  "homepage": "https://vhngdng.github.io/spring"
 }

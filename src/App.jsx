@@ -49,10 +49,10 @@ function App() {
 	const productAmount = useRef();
 	const handleAddCount = (id) => {
 		let newList = productList.map((product) => {
-			if (product.id === id) {
-				product.count += 1;
-			}
-			setTotalMoney((prev) => prev + product.price);
+			product.id === id &&
+				(product.count += 1) &&
+				setTotalMoney((prev) => prev + product.price);
+
 			console.log(totalMoney);
 			return product;
 		});
