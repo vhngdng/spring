@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/spring/static/css/main.61136f9b.css",
-    "main.js": "/spring/static/js/main.cbbcb2e1.js",
+    "main.js": "/spring/static/js/main.906dafc4.js",
     "static/media/fa-solid-900.ttf": "/spring/static/media/fa-solid-900.b1a653db79258eeccc5d.ttf",
     "static/media/fa-brands-400.ttf": "/spring/static/media/fa-brands-400.450a5c898f0b184b968b.ttf",
     "static/media/fa-solid-900.woff2": "/spring/static/media/fa-solid-900.41c0f706d8ce93933771.woff2",
@@ -12,10 +12,10 @@
     "static/media/fa-v4compatibility.woff2": "/spring/static/media/fa-v4compatibility.4ee7f902d88f819e251c.woff2",
     "index.html": "/spring/index.html",
     "main.61136f9b.css.map": "/spring/static/css/main.61136f9b.css.map",
-    "main.cbbcb2e1.js.map": "/spring/static/js/main.cbbcb2e1.js.map"
+    "main.906dafc4.js.map": "/spring/static/js/main.906dafc4.js.map"
   },
   "entrypoints": [
     "static/css/main.61136f9b.css",
-    "static/js/main.cbbcb2e1.js"
+    "static/js/main.906dafc4.js"
   ]
 }

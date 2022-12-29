@@ -1,9 +1,0 @@
-version: '3.8'
-services:
-  app:
-    image: test-react:v2
-    ports: 
-      - "8080:80"
-    volumes:
-      - ./src:/app/src
-    restart: unless-stopped
