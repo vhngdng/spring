@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import ProductItem from "./ProductItem";
 
 function ProductList({
@@ -8,7 +8,6 @@ function ProductList({
 	handleDeleteCount,
 	deleteProduct,
 }) {
-	console.log(productList);
 	return (
 			<div className="product-list">
 				{productList.map((product) => (
@@ -25,4 +24,4 @@ function ProductList({
 	);
 }
 
-export default ProductList;
+export default memo(ProductList);

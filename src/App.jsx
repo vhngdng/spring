@@ -1,7 +1,7 @@
 
 import "./App.css";
 import ProductList from "./component/product/ProductList";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Bill from "./component/bill/Bill";
 const productListMount = [
 	{
@@ -48,18 +48,17 @@ function App() {
 	}, []);
 
 	const productAmount = useRef();
-	const handleAddCount = (id) => {
+	const handleAddCount = useCallback((id) => {
 		let newList = productList.map((product) => {
 			product.id === id &&
 				(product.count += 1) &&
 				setTotalMoney((prev) => prev + product.price);
 
-			console.log(totalMoney);
 			return product;
 		});
 		setProductList(newList);
-	};
-	const handleDeleteCount = (id) => {
+	}, [productList]);
+	const handleDeleteCount = useCallback((id) => {
 		let newList = productList.map((product) => {
 			product.id === id &&
 				product.count >= 2 &&
@@ -69,16 +68,16 @@ function App() {
 			return product;
 		});
 		setProductList(newList);
-	};
+	}, [productList]);
 
-	const deleteProduct = (id) => {
+	const deleteProduct = useCallback((id) => {
 		let checkConfirm = window.confirm();
 		if (checkConfirm === true) {
 			let newList = productList.filter((product) => product.id !== id);
 			setProductList(newList);
 			setTotalMoney(() => newList.reduce((n, curr) => n + curr.price, 0));
 		}
-	};
+	}, [productList]);
 	return (
 		<>
 			{totalMoney === 0 && (
