@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
+import { ProductContext } from "../../ProductContext";
 
-function Bill({ totalMoney }) {
+function Bill() {
+	let {totalMoney} = useContext(ProductContext);
 	console.log(totalMoney);
+
 	return (
 		<div className="bill">
 			<div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">

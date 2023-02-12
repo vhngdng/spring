@@ -31,7 +31,7 @@ function TodoList() {
 	};
 
 	const handleToggleStatus = (id) => {
-		let todosNew = todos.map(n => {
+		let todosNew = todos.map((n) => {
 			if (n.id === id) {
 				n.status = !n.status;
 				let { status: statusNew } = n;
@@ -43,13 +43,13 @@ function TodoList() {
 	};
 
 	const handleUpdateTitle = async (id) => {
-		let oldTitle = todos.find(n => n.id === id).title;
+		let oldTitle = todos.find((n) => n.id === id).title;
 		let newTitle = window.prompt("Title", oldTitle);
 		newTitle !== oldTitle &&
 			newTitle !== null &&
 			updateTodo(newTitle, null, id) &&
 			setTodos(
-				todos.map(n => {
+				todos.map((n) => {
 					if (n.id === id) {
 						n.title = newTitle;
 					}
@@ -60,7 +60,9 @@ function TodoList() {
 
 	const handleDelete = async (id) => {
 		try {
-			await axios.delete(`${API_URL}/${id}`).then(() => setTodos(todos.filter(n => n.id !== id)));
+			await axios
+				.delete(`${API_URL}/${id}`)
+				.then(() => setTodos(todos.filter((n) => n.id !== id)));
 		} catch (error) {
 			console.log(error);
 		}
@@ -68,14 +70,16 @@ function TodoList() {
 
 	const handleAdd = () => {
 		try {
-			axios.post(`${API_URL}`, {
-				title: title,
-			})
-			.then(res => {
-				setTodos([...todos, res.data]);
-			})
-		} catch (error) {console.log(error)}
-		
+			axios
+				.post(`${API_URL}`, {
+					title: title,
+				})
+				.then((res) => {
+					setTodos([...todos, res.data]);
+				});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -91,8 +95,11 @@ function TodoList() {
 			<button onClick={() => handleAdd()}>Add</button>
 
 			<ul>
-				{todos.length === 0 && <li>Không có công việc nào trong                     {console.log(productList)};
-danh sách</li>}
+				{todos.length === 0 && (
+					<li>
+						Không có công việc nào trong danh sách
+					</li>
+				)}
 				{todos.length > 0 &&
 					todos.map((todo) => (
 						<li key={todo.id}>

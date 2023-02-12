@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState, axios } from "react";
 
 /*
@@ -27,9 +26,8 @@ function Post() {
         setTimeout(() => {
           setLoading(false);
         }, 2000);
-			} catch {
-				(error) => console.log(console.error());
-			}
+			} catch(error) { console.log(console.error())};
+
 		}
     getPosts();
 	}, [type]);

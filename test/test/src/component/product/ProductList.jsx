@@ -1,28 +1,20 @@
-import React from "react";
+import React, {memo, useContext} from "react";
 import ProductItem from "./ProductItem";
+import { ProductContext } from "../../ProductContext";
 
-function ProductList({
-	productList,
-	productAmount,
-	handleAddCount,
-	handleDeleteCount,
-	deleteProduct,
-}) {
-	console.log(productList);
+function ProductList() {
+	let {productList} = useContext(ProductContext);
+
 	return (
 			<div className="product-list">
 				{productList.map((product) => (
 					<ProductItem
 						key={product.id}
 						product={product}
-						productAmount={productAmount}
-						handleAddCount={handleAddCount}
-						handleDeleteCount={handleDeleteCount}
-						deleteProduct={deleteProduct}
 					/>
 				))}
 			</div>
 	);
 }
 
-export default ProductList;
+export default memo(ProductList);

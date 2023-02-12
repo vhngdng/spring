@@ -1,0 +1,16 @@
+# .dockerignore
+
+# Ignore Maven target directory
+target/
+
+# Ignore IDE files
+.idea/
+.project
+.classpath
+
+# Ignore Git files
+.git/
+.gitignore
+
+# Ignore FE react project
+src/main/resources/templates.react

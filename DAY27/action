@@ -1,0 +1,21 @@
+action : {
+  type : Loai action (bat buoc)
+  payload: DU lieu de thay doi state (option)
+}
+
+Function tao ra action => action creator
+
+const add = () => {
+  return {
+    type: "add",
+    payload: 2
+  }
+}
+
+reducer:
+- La function co 2 tham so: state hien tai, action
+- Phu thuoc vao type, payload de thay doi state
+- Khi state thay doi => UI se tu dong duoc cap nhat lai
+
+
+store : quan ly nhieu reducer

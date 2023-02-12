@@ -1,0 +1,20 @@
+.post-description {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.post-meta {
+  color: var(--secondary);
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.page-header {
+  margin: 24px auto var(--content-gap);
+}
+
+.page-header h1{
+  font-weight: 900;
+  font-size: 40px;
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dc2cee3c-fd24-4c43-9f8f-2c9118a91a92" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/controller/TodoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/dto/TodoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/entity/Todo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/exception/BadRequestException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/exception/ErrorMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/exception/HandleException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/exception/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/repository/TodoRepostiory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/request/CreateTodoRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/request/UpdateTodoRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DAY24/todo-data-jpa/src/main/java/com/example/tododatajpa/service/TodoServiceImpl/TodoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DAY01" beforeDir="false" afterPath="$PROJECT_DIR$/../../DAY01" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DAY04/Test/test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../DAY04/Test/test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/todolist/TodoList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/todolist/TodoList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/asset-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/test/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/src/component/bill/Bill.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/test/src/component/bill/Bill.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/src/component/product/ProductItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/test/src/component/product/ProductItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/src/component/product/ProductList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/test/src/component/product/ProductList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/test/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/css/main.61136f9b.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/css/main.61136f9b.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/js/main.cbbcb2e1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/js/main.cbbcb2e1.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/js/main.cbbcb2e1.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-brands-400.3ac6859b28be946745f9.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-brands-400.450a5c898f0b184b968b.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-regular-400.1f3772178d9e5bed38a6.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-regular-400.3cd9fb8fcec4ad0f99d4.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-solid-900.41c0f706d8ce93933771.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-solid-900.b1a653db79258eeccc5d.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-v4compatibility.4ee7f902d88f819e251c.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/test/static/media/fa-v4compatibility.e314b618134d5be20996.ttf" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LPDNvOv7kotkUNWRysU0PD9u9U" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/dung/Documents/springTechMaster/DAY19/hook-demo",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dc2cee3c-fd24-4c43-9f8f-2c9118a91a92" name="Changes" comment="" />
+      <created>1675763787241</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675763787241</updated>
+      <workItem from="1675763788700" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,17 +1,18 @@
-import React from "react";
+import React, { memo, useContext } from "react";
+import { ProductContext } from "../../ProductContext";
 
-function ProductItem({
-	product,
-	productAmount,
-	handleAddCount,
-	handleDeleteCount,
-	deleteProduct,
-}) {
+function ProductItem({ product }) {
+	let { 
+		productAmount, 
+		handleAddCount, 
+		handleDeleteCount, 
+		deleteProduct } 
+		= useContext(ProductContext);
 	return (
 		<>
 			<div className="product-item d-flex border mb-4">
 				<div key={product.image} className="image">
-					<img src={product.image} alt={product.name} className="img-fluid"/>
+					<img src={product.image} alt={product.name} className="img-fluid" />
 				</div>
 				<div
 					key={product.id}
@@ -64,4 +65,4 @@ function ProductItem({
 	);
 }
 
-export default ProductItem;
+export default memo(ProductItem);
