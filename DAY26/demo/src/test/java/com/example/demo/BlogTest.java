@@ -30,4 +30,9 @@ public class BlogTest {
             .map(Blog::getTitle)
             .collect(Collectors.toList()));
   }
+
+  @Test
+  void findTop3CommentBlogsTest() {
+    System.out.println(blogRepository.findTop3AmountComment().stream().map(Blog::getId).collect(Collectors.toList()));
+  }
 }

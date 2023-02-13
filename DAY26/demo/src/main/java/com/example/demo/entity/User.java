@@ -41,4 +41,9 @@ public class User extends AuditingEntity {
     this.avatar = avatar;
     this.password = password;
   }
+
+  public User(Integer id, String name) {
+    this.id = id;
+    this.name = name;
+  }
 }

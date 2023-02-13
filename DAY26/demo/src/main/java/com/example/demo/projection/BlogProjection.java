@@ -1,8 +1,10 @@
 package com.example.demo.projection;
 
 
+import com.example.demo.entity.Category;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +14,7 @@ import lombok.Setter;
 
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 
 public interface BlogProjection {
@@ -24,7 +27,9 @@ public interface BlogProjection {
   LocalDateTime getCreatedAt();
 //  @JsonFormat(pattern = "yyyy-MM-DD")
   LocalDateTime getPublishedAt();
-
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  @JsonProperty("category")
+  Set<Category> getCategories();
 
   Integer getCountComment();
   @JsonIgnore
@@ -54,6 +59,8 @@ public interface BlogProjection {
   }
 
   default CategorySimplify getCategory() {
-    return new CategorySimplify(getCategoryId(), getCategoryName());
+
+      return new CategorySimplify(getCategoryId(), getCategoryName());
+
   }
 }

@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 
 public class Blog extends AuditingEntity{
   @Id
@@ -49,6 +47,8 @@ public class Blog extends AuditingEntity{
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
+  @JsonIgnoreProperties({"email", "password", "avatar", "createdAt", "updatedAt"})
+  @JsonProperty("author")
   private User user;
 
   @ManyToMany(fetch = FetchType.LAZY,
@@ -64,7 +64,13 @@ public class Blog extends AuditingEntity{
           cascade = CascadeType.ALL)
   private List<Comment> comments;
 
+  @JsonProperty()
+  public int getCommentsCount() {
+    return this.comments.size();
+  }
+
   public void addCategories(Set<Category> categories) {
     this.categories.addAll(categories);
   }
+
 }

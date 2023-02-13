@@ -39,11 +39,19 @@ public interface BlogRepository extends JpaRepository<Blog, Integer> {
   @Query(value = "select b from Blog b where b.publishedAt is not null order by b.createdAt desc ")
   List<Blog> findAllPublicBlogs();
 
-  @Query(value = "select b, count (c.id) from Blog b " +
+  @Query(value =
+//          "select b.id as id, b.title as title, b.thumbnail as thumbnail, b.slug as slug, b.publishedAt as publishedAt, b.createdAt as createdAt, " +
+//          "b.description as description, b.user.id as userId, b.user.name as userName, b.categories as categories, count (com.id) as countComment from Blog b " +
+//          "inner join Comment com " +
+//          "on b.id = com.blog.id " +
+//          "group by b.id " +
+//          "order by count (com.id) DESC , b.createdAt DESC "
+          ////////////////////////////////////////////////////////////
+          "select b, count (c.id) as countComment from Blog b " +
           "left join Comment c " +
           "on b.id = c.blog.id " +
           "group by b.id " +
-          "order by count (c.id) DESC , b.createdAt DESC"
+          "order by count (c.id) DESC , b.createdAt DESC "
   )
   List<Blog> findTop3AmountComment();
 

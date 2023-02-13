@@ -49,7 +49,7 @@ public class BlogService {
 
   public Page<Blog> findTop3CommentBlogs(PageRequest pageable) {
     List<Blog> blogsTop3 = blogRepository.findTop3AmountComment();
-    return new PageImpl<>(blogsTop3, pageable, 2);
+    return new PageImpl<>(blogsTop3.subList(0,3), pageable, 2);
   }
 
   public List<BlogProjection> findPublicBlogsByCategoryId(int id) {

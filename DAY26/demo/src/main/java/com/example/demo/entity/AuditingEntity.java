@@ -17,7 +17,7 @@ public abstract class AuditingEntity {
   public void prePersist() {
     this.createdAt = LocalDateTime.now();
   }
-  @PreUpdate
+  @PostUpdate
   public void preUpdate() {
     this.updatedAt = LocalDateTime.now();
   }
