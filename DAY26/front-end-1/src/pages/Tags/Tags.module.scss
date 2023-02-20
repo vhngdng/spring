@@ -1,0 +1,13 @@
+.terms-tags li {
+  display: inline-block;
+  margin: 10px;
+  font-weight: 500;
+}
+
+.tag-name{
+  display: block;
+  padding: 3px 10px;
+  background: var(--tertiary);
+  border-radius: 6px;
+  transition: transform .1s;
+}

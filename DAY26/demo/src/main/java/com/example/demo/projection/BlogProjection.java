@@ -16,13 +16,15 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public interface BlogProjection {
   Integer getId();
   String getTitle();
   String getSlug();
   String getDescription();
   String getThumbnail();
+  String getContent();
+  boolean getStatus();
   @JsonFormat(pattern = "yyyy-MM-DD")
   LocalDateTime getCreatedAt();
 //  @JsonFormat(pattern = "yyyy-MM-DD")

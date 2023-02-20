@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"name": "front-end-1",
+			"path": "."
+		},
+		{
+			"path": "../nginx"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}

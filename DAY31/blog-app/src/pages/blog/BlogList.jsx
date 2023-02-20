@@ -56,8 +56,8 @@ function BlogList() {
 														<Link to={`/admin/blogs/${b.id}`}>{b.title}</Link>
 													</td>
 													<td>
-														<Link to={`/admin/users/${b.user.id}`}>
-															{b.user.name}
+														<Link to={`/admin/users/${b.author.id}`}>
+															{b.author.name}
 														</Link>
 													</td>
 													<td>{b.categories.map((c) => c.name).join(", ")}</td>

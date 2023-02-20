@@ -32,9 +32,9 @@ public class CategoryTests {
   }
 
   @Test
-  void findAllByPublishedAtLessThanEqualOrderByCreatedAtDescTest() {
+  void findAllByPublishedAtLessThanEqualOrderByPublishedAtDescTest() {
     LocalDateTime now = LocalDateTime.now();
-    System.out.println(blogRepository.findAllByPublishedAtLessThanEqualOrderByCreatedAtDesc(now, PageRequest.of(0, 2)));
+    System.out.println(blogRepository.findAllByPublishedAtLessThanEqualAndStatusOrderByPublishedAtDesc(now, PageRequest.of(0, 2), true));
   }
 
   @Test
@@ -43,5 +43,10 @@ public class CategoryTests {
             .stream()
             .map(CategoryProjection::getUsed)
             .collect(Collectors.toList()));
+  }
+
+  @Test
+  void findAllCategoryTest() {
+    System.out.println(categoryRepository.findAllCategories().stream().map(CategoryProjection::getUsed).toList());
   }
 }

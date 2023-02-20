@@ -22,7 +22,7 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
           "on c.id = bc.category_id " +
           "GROUP BY c.id " +
           "ORDER by COUNT(bc.blog_id) DESC " +
-          "LIMIT 5 " , nativeQuery = true)
+          "LIMIT 5 ", nativeQuery = true)
   List<CategoryProjection> findTop5Categories();
 
   Set<Category> findByIdIn(List<Integer> ids);
@@ -34,4 +34,9 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
           "on c.id = bc.category_id " +
           "GROUP BY c.id", nativeQuery = true)
   List<CategoryProjection> findCategoriesWithUsedCount();
+
+  @Query("select c.id as id, c.name as name, count(b.id) as used from Blog b " +
+          "join b.categories c " +
+          "group by c.id")
+  List<CategoryProjection> findAllCategories();
 }

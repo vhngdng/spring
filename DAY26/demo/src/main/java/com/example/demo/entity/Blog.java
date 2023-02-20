@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Blog extends AuditingEntity{
   private Integer id;
 
   @Column
+  @NotNull
   private String title;
   @Column
   private String slug;
@@ -35,6 +37,7 @@ public class Blog extends AuditingEntity{
   @Column(name = "description", columnDefinition = "TEXT")
   private String description;
   @Column(name = "content", columnDefinition = "TEXT")
+  @NotNull
   private String content;
   @Column
   private String thumbnail;

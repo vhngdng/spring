@@ -53,4 +53,6 @@ public class CategoryController {
   ResponseEntity<?> findAllWithUsedCount() {
     return ResponseEntity.ok(categoryService.findAllWithUsedCount());
   }
+
+
 }

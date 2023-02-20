@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.BlogDTO;
 import com.example.demo.entity.Blog;
 import com.example.demo.projection.BlogProjection;
+import com.example.demo.projection.ResultKeyword;
 import com.example.demo.request.UpSertBlogRequest;
 import com.example.demo.service.BlogService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin/blogs")
@@ -28,43 +30,50 @@ public class BlogController {
   private BlogService blogService;
 
   @GetMapping("/simplifyBlogs")
-  List<BlogProjection> findAllWithCreatedDESC() {
-    return blogService.findAllWithCreatedDESC();
+  ResponseEntity<?> findAllWithCreatedDESC() {
+    return ResponseEntity.ok(blogService.findAllWithCreatedDESC());
   }
 
   @GetMapping("/publicBlogs")
-  Page<Blog> findPagingPublicBlogs(@RequestParam(name = "page",defaultValue = "0") int page,
-                                @RequestParam(name = "size", defaultValue = "2") int size) {
+  ResponseEntity<?> findPagingPublicBlogs(@RequestParam(name = "page", defaultValue = "0") int page,
+                                          @RequestParam(name = "size", defaultValue = "10") int size) {
     Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
-    return blogService.findPagingPublicBlogs(paging);
+    return ResponseEntity.ok(blogService.findPagingPublicBlogs(paging));
   }
+
   @GetMapping("/all-published-blogs")
-  List<Blog> findAllPublishedBlogs() {
-    return blogService.findAllPublishedBlogs();
+  ResponseEntity<?> findAllPublishedBlogs() {
+    return ResponseEntity.ok(blogService.findAllPublishedBlogs());
   }
 
   @GetMapping("/top3-comment-blogs")
-  Page<Blog> findAllPublicBlogs() {
-    return blogService.findTop3CommentBlogs(PageRequest.of(0, 3));
+  ResponseEntity<?> findTop3CommentPublicBlogs() {
+    return ResponseEntity.ok(blogService.findTop3CommentBlogs(PageRequest.of(0, 3)));
   }
 
   @GetMapping("/categories/{categoryId}")
-  List<BlogProjection> findPublicBlogsByCategoryId(@PathVariable("categoryId") @NotNull Integer id) {
-    return blogService.findPublicBlogsByCategoryId(id);
+  ResponseEntity<?> findPublicBlogsByCategoryId(@PathVariable("categoryId") @NotNull Integer id,
+                                                @RequestParam(name = "page", defaultValue = "0") int page,
+                                                @RequestParam(name = "size", defaultValue = "10") int size) {
+    log.info(String.valueOf(page));
+    return ResponseEntity.ok(blogService.findPublicBlogsByCategoryId(id, page, size));
   }
 
   @GetMapping("/author")
-  List<BlogProjection> findPublicBlogsByUserId(@RequestParam("authorId") @NotNull Integer id) {
-    return blogService.findPublicBlogsByUserId(id);
+  ResponseEntity<?> findPublicBlogsByUserId(@RequestParam("authorId") @NotNull Integer id) {
+    return ResponseEntity.ok(blogService.findPublicBlogsByUserId(id));
   }
 
   @GetMapping("/search")
-  List<Blog> findBlogsByKeywordTitle(@RequestParam("keyword") @NotNull String keyword) {
-    return blogService.findBlogsByKeywordTitle(keyword);
+  ResponseEntity<?> findBlogsByKeyword(@RequestParam("keyword") @NotNull String keyword) {
+    log.info(blogService.findByKeyword(keyword).stream().map(ResultKeyword::getId).toList().toString());
+    return ResponseEntity.ok(blogService.findByKeyword(keyword));
   }
+
   @GetMapping("")
-  public ResponseEntity<?> getAllBlogs() {
-    return ResponseEntity.ok(blogService.getAllBlog());
+  public ResponseEntity<?> getAllBlogs(@RequestParam(name = "page", defaultValue = "0") int page,
+                                       @RequestParam(name = "size", defaultValue = "10") int size) {
+    return ResponseEntity.ok(blogService.getAllBlog(page, size));
   }
 
   @PostMapping("")
@@ -88,4 +97,8 @@ public class BlogController {
     return ResponseEntity.notFound().build();  //204
   }
 
+  @GetMapping("all-id-blogs")
+  ResponseEntity<?> findAllIdBlogs() {
+    return ResponseEntity.ok(blogService.findAllIdBlogs());
   }
+}

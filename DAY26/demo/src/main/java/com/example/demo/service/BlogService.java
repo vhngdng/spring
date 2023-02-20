@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.BlogDTO;
 import com.example.demo.entity.Blog;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.User;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.projection.BlogProjection;
+import com.example.demo.projection.ResultKeyword;
 import com.example.demo.repository.BlogRepository;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.UserRepository;
@@ -13,16 +13,15 @@ import com.example.demo.request.UpSertBlogRequest;
 import com.github.slugify.Slugify;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -37,31 +36,34 @@ public class BlogService {
   @Autowired
   private Slugify slugify;
 
-  public List<BlogProjection> findAllWithCreatedDESC(){
+  public List<BlogProjection> findAllWithCreatedDESC() {
     return blogRepository.findAllWithCreatedDESC();
   }
 
   public Page<Blog> findPagingPublicBlogs(Pageable pageable) {
-     return blogRepository.findAllByPublishedAtLessThanEqualOrderByCreatedAtDesc(LocalDateTime.now() ,pageable);
+    return blogRepository.findAllByPublishedAtLessThanEqualAndStatusOrderByPublishedAtDesc(LocalDateTime.now(), pageable, true);
 
   }
 
 
   public Page<Blog> findTop3CommentBlogs(PageRequest pageable) {
     List<Blog> blogsTop3 = blogRepository.findTop3AmountComment();
-    return new PageImpl<>(blogsTop3.subList(0,3), pageable, 2);
+    return new PageImpl<>(blogsTop3.subList(0, 3), pageable, 2);
   }
 
-  public List<BlogProjection> findPublicBlogsByCategoryId(int id) {
-    return blogRepository.findPublicBlogsByCategoryId(id);
+  public Page<BlogProjection> findPublicBlogsByCategoryId(int id, int page, int size) {
+    Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
+    log.info("test===================================");
+    return blogRepository.findPublicBlogsByCategoryId(id, pageable);
   }
 
   public List<BlogProjection> findPublicBlogsByUserId(int id) {
     return blogRepository.findPublicBlogsByUserId(id);
   }
 
-  public List<Blog> getAllBlog() {
-    return blogRepository.findAll();
+  public Page<Blog> getAllBlog(int page, int size) {
+    Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "publishedAt"));
+    return blogRepository.findAll(pageable);
   }
 
 
@@ -69,7 +71,7 @@ public class BlogService {
     // Validate thong tin (neu can thiet) - validation
 
     // TIm kiem category
-  log.info("ids", request.getCategoryIds());
+    log.info("ids", request.getCategoryIds());
     Set<Category> categories = categoryRepository.findByIdIn(request.getCategoryIds());
     log.info("=============================================", categories.toString());
 
@@ -94,6 +96,7 @@ public class BlogService {
   public Blog getBlogById(Integer id) {
     return blogRepository.findById(id).orElseThrow(() -> new NotFoundException("Blog Id not found " + id));
   }
+
   @Transactional
   public Blog updateBlog(Integer id, UpSertBlogRequest request) {
     Blog blog = blogRepository.findById(id).orElseThrow(() -> new NotFoundException("Blog Id not found " + id));
@@ -107,7 +110,7 @@ public class BlogService {
       blog.setCategories(categoryRepository.findByIdIn(request.getCategoryIds()));
     }
 
-    return  blogRepository.save(blog);
+    return blogRepository.save(blog);
   }
 
   @Transactional
@@ -119,10 +122,19 @@ public class BlogService {
   }
 
   public List<Blog> findAllPublishedBlogs() {
-    return blogRepository.findAllByPublishedAtLessThanEqualOrderByPublishedAtDesc(LocalDateTime.now());
+    return blogRepository.findAllByPublishedAtLessThanEqualAndStatusOrderByPublishedAtDesc(LocalDateTime.now(), true);
   }
 
-  public List<Blog> findBlogsByKeywordTitle(String keyword) {
-    return blogRepository.findBlogsByTitleContainingIgnoreCase(keyword);
+  public List<ResultKeyword> findByKeyword(String keyword) {
+    List<ResultKeyword> result = new ArrayList<>();
+    result.addAll(blogRepository.findBlogsByDescription(keyword).stream().filter(n -> !n.getResult().isEmpty()).toList());
+    result.addAll(blogRepository.findBlogsByContent(keyword).stream().filter(n -> !n.getResult().isEmpty()).toList());
+    result.addAll(blogRepository.findBlogsByTitle(keyword).stream().filter(n -> !n.getResult().isEmpty()).toList());
+
+    return result;
+  }
+
+  public List<Integer> findAllIdBlogs() {
+    return blogRepository.findAllIdBlogs();
   }
 }

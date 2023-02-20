@@ -14,6 +14,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 
 import java.time.LocalDateTime;
@@ -127,6 +130,6 @@ public class InitData {
   }
   @Test
   void findPublicBlogsByCategoryIdTest() {
-    System.out.println(blogRepository.findPublicBlogsByCategoryId(1));
+    System.out.println(blogRepository.findPublicBlogsByCategoryId(3, PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "publishedAt"))));
   }
 }

@@ -24,8 +24,8 @@ public class Category {
   @Column(unique = true, nullable = false)
   private String name;
 
-//  @ManyToMany(mappedBy = "categories")
-//  private Set<Blog> blog_id = new LinkedHashSet<>();
+//  @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+//  private Set<Blog> blogs = new LinkedHashSet<>();
 
   public Category(String name) {
     this.name = name;

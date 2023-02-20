@@ -30,6 +30,13 @@ public class ImageController {
             .body(imageService.readImage(id));
   }
 
+  @GetMapping("pdf/{id}")
+  public ResponseEntity<byte[]> readPdf(@PathVariable int id) {
+    return ResponseEntity.ok()
+            .contentType(MediaType.APPLICATION_PDF)
+            .body(imageService.readImage(id));
+  }
+
   // Upload ảnh
   @PostMapping("")
   public ResponseEntity<?> uploadImage(@ModelAttribute("file") MultipartFile file) {

@@ -1,0 +1,22 @@
+version: "3"
+services:
+  frontend1:
+    image: admin-blog
+    ports:
+      - 3000:3000
+
+  backend:
+    image: spring-blog
+    ports:
+      - 8080:8080
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes: 
+      - ./nginx.conf:etc/nginx/nginx.conf:ro
+      - ./public:/usr/share/nginx/html:ro
+    depends_on:
+      - frontend1
+      - backend

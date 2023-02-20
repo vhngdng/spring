@@ -24,8 +24,8 @@ public class CategoryService {
     return categoryRepository.findTop5Categories();
   }
 
-  public List<Category> findAll() {
-    return categoryRepository.findAll();
+  public List<CategoryProjection> findAll() {
+    return categoryRepository.findAllCategories();
   }
 
   public Category createCategory(UpSertCategoryRequest request) {
@@ -62,4 +62,6 @@ public class CategoryService {
   public List<CategoryProjection> findAllWithUsedCount() {
     return categoryRepository.findCategoriesWithUsedCount();
   }
+
+
 }
