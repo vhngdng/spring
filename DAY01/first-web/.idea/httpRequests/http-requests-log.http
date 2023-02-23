@@ -1,0 +1,42 @@
+GET http://localhost:5050/api/v1/books
+
+<> 2022-11-09T211413.404.json
+
+###
+
+GET http://localhost:5050/api/v1/books
+
+<> 2022-11-09T211409.404.json
+
+###
+
+GET http://localhost:5050/api/v1/books
+
+<> 2022-11-09T211406.404.json
+
+###
+
+GET http://localhost:5050/api/v1/books
+
+<> 2022-11-09T211336.404.json
+
+###
+
+GET http://localhost:5050/api/v1/books
+
+<> 2022-11-09T211332.404.json
+
+###
+
+GET http://localhost:5050/api/v1/helloworld
+
+<> 2022-11-09T211311.200.txt
+
+###
+
+GET http://localhost:5050/api/v1/helloworld
+
+<> 2022-11-09T201932.200.txt
+
+###
+

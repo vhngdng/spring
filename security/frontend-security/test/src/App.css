@@ -1,0 +1,20 @@
+.App {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	top: 30vh;
+}
+
+.login-form {
+	min-height: max-content;
+	display: block;
+	justify-content: center;
+}
+
+.input-form {
+	display: flex;
+	box-sizing: border-box;
+	justify-content: space-between;
+	width: auto;
+}
